@@ -61,12 +61,7 @@ describe('UserValidator unit tests', () => {
         'name must be shorter than or equal to 255 characters'
       ]);
 
-
-
-
     });
-
-
 
   });
 
@@ -123,5 +118,62 @@ describe('UserValidator unit tests', () => {
     });
 
   });
+
+
+   describe('Password field', () => {
+    it('Invalidation cases for password field ', () => {
+      let isValid = sut.validate(null as any)
+      expect(isValid).toBeFalsy();
+      expect(sut.erros['password']).toStrictEqual([
+        'password should not be empty',
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters'
+      ]);
+
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        password: '' as any
+      });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.erros['password']).toStrictEqual(['password should not be empty']);
+
+
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        password: 10 as any
+      });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.erros['password']).toStrictEqual([
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters'
+      ]);
+
+
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        password: 'a'.repeat(256),
+      });
+
+      expect(isValid).toBeFalsy();
+      expect(sut.erros['password']).toStrictEqual([
+        'password must be shorter than or equal to 100 characters'
+      ]);
+
+
+
+
+    });
+
+
+
+  });
+
+
+
 });
 
