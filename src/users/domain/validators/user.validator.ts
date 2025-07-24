@@ -20,14 +20,10 @@ export class UserRules{
   @IsNotEmpty()
   password: string;
 
-  @MaxLength(100)
-  @IsString()
-  @IsNotEmpty()
-
 
   @IsDate()
   @IsOptional()
-  createdAt: Date;
+  createdAt?: Date;
 
 
   constructor({email, name, password, createdAt }: UserProps){
