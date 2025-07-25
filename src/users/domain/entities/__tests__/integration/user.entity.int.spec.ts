@@ -105,7 +105,17 @@ describe("UserEntity Integration Tests", () => {
     });
 
 
-  });
+    it("Should a valid createdAt", () =>{
+      expect.assertions(0);
+      const props: UserProps = {
+        ...UserDataBuilder({}),
+      }
+      new UserEntity(props);
+    });
 
 
+
+
+
+   });
 });
