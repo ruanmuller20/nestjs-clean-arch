@@ -30,7 +30,8 @@ implements RepositoryInterface <E>{
 
   async delete(id: string): Promise<void> {
     await this._get(id);
-    this.items = this.items.filter(item => item.id !== id);
+    const index = this.items.findIndex(item => item.id === id);
+    this.items.splice(index, 1);
   }
 
 
